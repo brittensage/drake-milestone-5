@@ -1,5 +1,105 @@
-/* Custom neat styling for Drake Milestone 4 */
+/* Custom styling for Drake Milestone 5 with animated album background */
 
+html {
+  background-color: #f1f5f9;
+}
+
+body {
+  background-color: transparent !important;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Animated moving album covers in background */
+.album-background-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.55; /* Clearly and vibrantly visible across the entire site */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1.5rem;
+  transform: rotate(-3deg) scale(1.15);
+  filter: saturate(1.2) contrast(1.05);
+}
+
+.album-marquee-track {
+  display: flex;
+  width: max-content;
+  overflow: hidden;
+  user-select: none;
+}
+
+.album-marquee-group {
+  display: flex;
+  flex-shrink: 0;
+  gap: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.album-marquee-group img {
+  width: 150px;
+  height: 150px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+}
+
+.marquee-left .album-marquee-group {
+  animation: marquee-left-scroll 45s linear infinite;
+}
+
+.marquee-right .album-marquee-group {
+  animation: marquee-right-scroll 50s linear infinite;
+}
+
+@keyframes marquee-left-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-right-scroll {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Ensure navigation and page content layer cleanly above background */
+nav.navbar {
+  position: relative;
+  z-index: 50 !important;
+}
+
+#quarto-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* Content card overlay: semi-transparent so background peeks through */
+main.content {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+/* Metric cards */
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -8,18 +108,18 @@
 }
 
 .stat-card {
-  background: #f8fafc;
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 1.25rem;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 14px -2px rgba(0, 0, 0, 0.1);
 }
 
 .stat-number {
@@ -38,16 +138,17 @@
   margin-top: 0.35rem;
 }
 
+/* Track card */
 .track-card {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1.5rem;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   margin-top: 1.25rem;
 }
 
@@ -61,9 +162,9 @@
 .track-art {
   width: 130px;
   height: 130px;
-  border-radius: 8px;
+  border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .badge-tag {

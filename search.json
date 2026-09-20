@@ -49,18 +49,11 @@
     "text": "Streaming Distribution\nAccording to Songstats cross-platform monitoring, the release is tracked across multiple DSPs including:\n\nSpotify: Available across 184 country markets (Listen on Spotify)\nApple Music: Catalog ID 1880726848\nDeezer: Track ID 3871419791\nTidal: Track ID 502868283\nAmazon Music: ASIN B0GQJP4F4K"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This website analyzes Drake’s historic music career by bringing together multi-source data across Billboard chart longevity, cross-platform DSP distribution, and global Spotify streaming numbers."
-  },
-  {
     "objectID": "about.html#project-overview",
     "href": "about.html#project-overview",
     "title": "About",
-    "section": "",
-    "text": "This website analyzes Drake’s historic music career by bringing together multi-source data across Billboard chart longevity, cross-platform DSP distribution, and global Spotify streaming numbers."
+    "section": "Project Overview",
+    "text": "Project Overview\nThis website analyzes Drake’s historic music career by bringing together multi-source data across Billboard chart longevity, cross-platform DSP distribution, and global Spotify streaming numbers."
   },
   {
     "objectID": "about.html#data-sources-links",
