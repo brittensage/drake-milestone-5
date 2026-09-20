@@ -72,3 +72,22 @@ By the mid-2010s, this dynamic reversed. Rather than relying on others for expos
 Modern streaming data from [kworb.net](https://kworb.net/spotify/artist/3TVXtAsR1Inumwj472S9r4_songs.html) confirms that this strategy paid enormous digital dividends. Out of Drake's 140.7 billion total Spotify streams, 43.2 billion streams (30.7%) originate from tracks where he is credited as a featured artist. His feature on Rihanna's "Work" alone accounts for 1.76 billion streams, with Future's "Life Is Good" and Bad Bunny's "MIA" each adding more than 1.5 billion streams.
 
 Ultimately, Drake's dual identity as both a solo pop star and a prolific guest collaborator eliminated the downtime that typically sidelines artists between major LP releases. By keeping his voice in rotation 52 weeks a year, Drake maintained a historic 430-consecutive-week streak on the Billboard Hot 100—a record that remains unmatched in modern chart history.
+
+### Landmark Guest Features: Commercial Case Studies
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(knitr)
+
+tibble(
+  `Track Title` = c("Work", "MIA", "Love Me", "Life Is Good", "Look Alive"),
+  `Lead Artist` = c("Rihanna", "Bad Bunny", "Lil Wayne", "Future", "BlocBoy JB"),
+  `Hot 100 Peak` = c("#1 (9 weeks)", "#5", "#9", "#2 (8 weeks)", "#5"),
+  `Spotify Streams` = c("1.76 Billion", "1.62 Billion", "1.56 Billion", "1.52 Billion", "1.15 Billion"),
+  `Release Year` = c("2016", "2018", "2013", "2020", "2018")
+) |> 
+  kable(align = c("l", "l", "c", "r", "c"))
+```

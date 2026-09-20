@@ -2,13 +2,12 @@
 title: "Chart & Track Explorer"
 ---
 
-This tab puts interactive exploration directly into your hands. Explore **2,569 weekly Billboard Hot 100 observations** spanning Drake's career from 2009 through 2021.
+This tab puts control directly in your hands. Explore **2,569 weekly Billboard Hot 100 observations** across Drake's chart career (2009–2021).
 
-### How to use this interactive plot:
-- **Hover:** Move your cursor over any point to see the song title, date, chart position, peak rank, and collaboration credits.
-- **Filter Roles:** Click on "Lead Artist" or "Featured Artist" in the legend to toggle them on or off.
-- **Zoom In:** Click and drag a rectangle over any time period (such as the Summer 2018 *Scorpion* era) to inspect individual chart weeks in detail.
-- **Reset:** Double-click anywhere on the plot area to return to the full career view.
+### Interactive Exploration Tools:
+- **Pull-down Menu:** Use the dropdown menu in the upper-left of the chart to instantly isolate **Lead Singles**, **Guest Features**, or view **All Tracks**.
+- **Hover Details:** Hover over any data point to reveal the song name, chart date, weekly position, peak rank, and collaboration credits.
+- **Click-and-Drag Zoom:** Click and drag a box over any cluster of points (such as the Summer 2018 *Scorpion* surge) to zoom in. Double-click anywhere to reset.
 
 ```{r}
 #| echo: false
@@ -25,7 +24,8 @@ drake_data <- read_csv("data/drake_billboard.csv", show_col_types = FALSE) |>
     role = if_else(str_starts(performer, "Drake"), "Lead Artist", "Featured Artist"),
     tooltip = str_c(
       "<b>", song, "</b><br>",
-      "Performer: ", performer, "<br>",
+      "Role: ", role, "<br>",
+      "Credit: ", performer, "<br>",
       "Date: ", week_date, "<br>",
       "Rank: #", week_position, "<br>",
       "Peak: #", peak_position, "<br>",
@@ -33,29 +33,70 @@ drake_data <- read_csv("data/drake_billboard.csv", show_col_types = FALSE) |>
     )
   )
 
-p <- ggplot(drake_data, aes(x = week_date, y = week_position, color = role, text = tooltip)) +
-  geom_point(alpha = 0.55, size = 1.6) +
-  scale_y_reverse(breaks = c(1, 10, 25, 50, 75, 100)) +
-  scale_color_manual(values = c("Lead Artist" = "#1e40af", "Featured Artist" = "#ea580c")) +
-  labs(
-    title = "Interactive Chart: 2,569 Weekly Billboard Observations",
-    x = "Date",
-    y = "Billboard Hot 100 Rank (1 is top)",
-    color = "Artist Role"
-  ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    plot.title = element_text(face = "bold", size = 14, color = "#0f172a"),
-    legend.position = "top",
-    panel.grid.minor = element_blank(),
-    panel.grid.major = element_line(color = "#f1f5f9")
+lead_data <- drake_data |> filter(role == "Lead Artist")
+feat_data <- drake_data |> filter(role == "Featured Artist")
+
+p <- plot_ly() |> 
+  add_trace(
+    data = lead_data,
+    x = ~week_date,
+    y = ~week_position,
+    name = "Lead Artist (1,484)",
+    type = "scatter",
+    mode = "markers",
+    text = ~tooltip,
+    hoverinfo = "text",
+    marker = list(size = 5.5, color = "#1e40af", opacity = 0.55)
+  ) |> 
+  add_trace(
+    data = feat_data,
+    x = ~week_date,
+    y = ~week_position,
+    name = "Featured Artist (1,085)",
+    type = "scatter",
+    mode = "markers",
+    text = ~tooltip,
+    hoverinfo = "text",
+    marker = list(size = 5.5, color = "#ea580c", opacity = 0.55)
+  ) |> 
+  layout(
+    title = list(
+      text = "<b>Interactive Billboard Hot 100 Explorer (2,569 Observations)</b>",
+      font = list(size = 15)
+    ),
+    xaxis = list(title = "Chart Date", showgrid = TRUE, gridcolor = "#f1f5f9"),
+    yaxis = list(title = "Hot 100 Rank (1 is top)", autorange = "reversed", showgrid = TRUE, gridcolor = "#f1f5f9"),
+    hoverlabel = list(bgcolor = "white", font = list(size = 12)),
+    legend = list(orientation = "h", x = 0.35, y = 1.12),
+    updatemenus = list(
+      list(
+        type = "dropdown",
+        direction = "down",
+        x = 0.0,
+        y = 1.15,
+        showactive = TRUE,
+        buttons = list(
+          list(
+            method = "restyle",
+            args = list("visible", list(TRUE, TRUE)),
+            label = "View: All Tracks (2,569)"
+          ),
+          list(
+            method = "restyle",
+            args = list("visible", list(TRUE, FALSE)),
+            label = "View: Lead Singles Only (1,484)"
+          ),
+          list(
+            method = "restyle",
+            args = list("visible", list(FALSE, TRUE)),
+            label = "View: Guest Features Only (1,085)"
+          )
+        )
+      )
+    )
   )
 
-ggplotly(p, tooltip = "text") |> 
-  layout(
-    legend = list(orientation = "h", x = 0.1, y = 1.12),
-    hoverlabel = list(bgcolor = "white", font = list(size = 12))
-  )
+p
 ```
 
 ---
