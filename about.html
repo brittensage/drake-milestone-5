@@ -202,22 +202,6 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </div>
 
-<script>
-  (function() {
-    function promoteBg() {
-      var bg = document.querySelector(".album-background-wrapper");
-      if (bg && bg.parentElement !== document.body) {
-        document.body.prepend(bg);
-      }
-    }
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", promoteBg);
-    } else {
-      promoteBg();
-    }
-  })();
-</script>
-
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">About</h1>
