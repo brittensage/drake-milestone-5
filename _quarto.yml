@@ -7,10 +7,12 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: features.qmd
+        text: The Feature Effect
+      - href: explorer.qmd
+        text: Chart Explorer
       - href: spotify.qmd
-        text: Spotify Streams
-      - href: billboard.qmd
-        text: Billboard Hot 100
+        text: Spotify Catalog
       - href: songstats.qmd
         text: Songstats Track
       - href: about.qmd

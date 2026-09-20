@@ -1,0 +1,98 @@
+---
+title: "Chart & Track Explorer"
+---
+
+This tab puts interactive exploration directly into your hands. Explore **2,569 weekly Billboard Hot 100 observations** spanning Drake's career from 2009 through 2021.
+
+### How to use this interactive plot:
+- **Hover:** Move your cursor over any point to see the song title, date, chart position, peak rank, and collaboration credits.
+- **Filter Roles:** Click on "Lead Artist" or "Featured Artist" in the legend to toggle them on or off.
+- **Zoom In:** Click and drag a rectangle over any time period (such as the Summer 2018 *Scorpion* era) to inspect individual chart weeks in detail.
+- **Reset:** Double-click anywhere on the plot area to return to the full career view.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 10
+#| fig-height: 6
+
+library(tidyverse)
+library(plotly)
+
+drake_data <- read_csv("data/drake_billboard.csv", show_col_types = FALSE) |> 
+  mutate(
+    role = if_else(str_starts(performer, "Drake"), "Lead Artist", "Featured Artist"),
+    tooltip = str_c(
+      "<b>", song, "</b><br>",
+      "Performer: ", performer, "<br>",
+      "Date: ", week_date, "<br>",
+      "Rank: #", week_position, "<br>",
+      "Peak: #", peak_position, "<br>",
+      "Weeks on Chart: ", weeks_on_chart
+    )
+  )
+
+p <- ggplot(drake_data, aes(x = week_date, y = week_position, color = role, text = tooltip)) +
+  geom_point(alpha = 0.55, size = 1.6) +
+  scale_y_reverse(breaks = c(1, 10, 25, 50, 75, 100)) +
+  scale_color_manual(values = c("Lead Artist" = "#1e40af", "Featured Artist" = "#ea580c")) +
+  labs(
+    title = "Interactive Chart: 2,569 Weekly Billboard Observations",
+    x = "Date",
+    y = "Billboard Hot 100 Rank (1 is top)",
+    color = "Artist Role"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, color = "#0f172a"),
+    legend.position = "top",
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_line(color = "#f1f5f9")
+  )
+
+ggplotly(p, tooltip = "text") |> 
+  layout(
+    legend = list(orientation = "h", x = 0.1, y = 1.12),
+    hoverlabel = list(bgcolor = "white", font = list(size = 12))
+  )
+```
+
+---
+
+## Searchable Billboard Database
+
+Filter and sort through every individual observation. Use the column search boxes to look up specific tracks (e.g., "God's Plan", "In My Feelings", "Hotline Bling") or view all songs that peaked at #1.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(DT)
+
+explorer_table <- drake_data |> 
+  select(
+    `Chart Date` = week_date,
+    `Rank` = week_position,
+    `Song Title` = song,
+    `Role` = role,
+    `Performer Credit` = performer,
+    `Peak Rank` = peak_position,
+    `Weeks on Chart` = weeks_on_chart
+  ) |> 
+  arrange(desc(`Chart Date`), `Rank`)
+
+datatable(
+  explorer_table,
+  filter = "top",
+  rownames = FALSE,
+  class = "hover stripe compact",
+  options = list(
+    pageLength = 15,
+    lengthMenu = c(10, 15, 25, 50, 100),
+    autoWidth = TRUE,
+    scrollX = TRUE
+  )
+)
+```

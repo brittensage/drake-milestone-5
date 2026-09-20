@@ -1,0 +1,74 @@
+---
+title: "The Feature Effect: How Collaborations Built an Empire"
+---
+
+Hip-hop has always been a collaborative genre, but Drake turned guest features into a deliberate strategy for uninterrupted commercial dominance. Between 2008 and 2021, Drake charted on the Billboard Hot 100 in 2,569 weekly observations. A remarkable 1,085 of those appearances—over 42%—came not from his own singles, but as a featured performer on other artists' tracks.
+
+The graphic below breaks down Drake's chart footprint by year, illustrating how guest verses carried his momentum during "gap years" between major album cycles.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 9.5
+#| fig-height: 5.5
+#| dpi: 300
+
+library(tidyverse)
+
+drake_data <- read_csv("data/drake_billboard.csv", show_col_types = FALSE) |> 
+  mutate(
+    year = year(week_date),
+    role = if_else(str_starts(performer, "Drake"), "Lead Artist", "Featured Artist")
+  ) |> 
+  filter(year >= 2009, year <= 2021)
+
+yearly_counts <- drake_data |> 
+  count(year, role)
+
+ggplot(yearly_counts, aes(x = factor(year), y = n, fill = role)) +
+  geom_col(position = "stack", width = 0.7) +
+  scale_fill_manual(
+    values = c("Lead Artist" = "#1e40af", "Featured Artist" = "#ea580c")
+  ) +
+  annotate(
+    "text",
+    x = 11, y = 160,
+    label = "2019: 77% of chart presence\npowered by features",
+    size = 3.3,
+    fontface = "italic",
+    color = "#b45309"
+  ) +
+  annotate(
+    "curve",
+    x = 11, y = 135, xend = 11, yend = 115,
+    curvature = 0.2,
+    arrow = arrow(length = unit(1.5, "mm")),
+    color = "#b45309"
+  ) +
+  labs(
+    title = "Annual Billboard Hot 100 Chart Weeks: Lead Singles vs. Guest Features",
+    subtitle = "In off-album years (2011, 2014, 2019, 2020), guest verses sustained over 50% to 77% of Drake's chart visibility",
+    x = "Year",
+    y = "Total Weekly Chart Entries",
+    fill = "Drake's Role",
+    caption = "Source: TidyTuesday / Billboard.com Archive (2,569 total observations)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, color = "#0f172a"),
+    plot.subtitle = element_text(color = "#475569", margin = margin(b = 12)),
+    legend.position = "top",
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(color = "#f1f5f9")
+  )
+```
+
+Early in his career (2009–2012), guest appearances provided an essential runway. Breakthrough collaborations with established stars like Lil Wayne, Rihanna, and Nicki Minaj built his crossover radio audience. By 2011, guest features represented over 67% of Drake's total Billboard chart footprint.
+
+By the mid-2010s, this dynamic reversed. Rather than relying on others for exposure, Drake became the genre's premier kingmaker. The industry coined the phrase "The Drake Stimulus Package" to describe the guaranteed commercial boost of a Drake guest verse. Hits like Bad Bunny's "MIA," Future's "Life Is Good," and BlocBoy JB's "Look Alive" debuted near the top of the Hot 100 primarily on the strength of Drake's co-signature.
+
+Modern streaming data from [kworb.net](https://kworb.net/spotify/artist/3TVXtAsR1Inumwj472S9r4_songs.html) confirms that this strategy paid enormous digital dividends. Out of Drake's 140.7 billion total Spotify streams, 43.2 billion streams (30.7%) originate from tracks where he is credited as a featured artist. His feature on Rihanna's "Work" alone accounts for 1.76 billion streams, with Future's "Life Is Good" and Bad Bunny's "MIA" each adding more than 1.5 billion streams.
+
+Ultimately, Drake's dual identity as both a solo pop star and a prolific guest collaborator eliminated the downtime that typically sidelines artists between major LP releases. By keeping his voice in rotation 52 weeks a year, Drake maintained a historic 430-consecutive-week streak on the Billboard Hot 100—a record that remains unmatched in modern chart history.
