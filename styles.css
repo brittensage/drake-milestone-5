@@ -1,32 +1,21 @@
-/* Custom styling for Drake Milestone 5 with animated album background */
-
-html {
-  background-color: #f1f5f9;
-}
-
-body {
-  background-color: transparent !important;
-  position: relative;
-  min-height: 100vh;
-}
-
-/* Animated moving album covers in background */
+/* Background moving album covers: strictly placed in the deep background */
 .album-background-wrapper {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 0;
-  pointer-events: none;
+  z-index: -9999 !important;
+  pointer-events: none !important;
+  user-select: none !important;
   overflow: hidden;
-  opacity: 0.55; /* Clearly and vibrantly visible across the entire site */
+  opacity: 0.12; /* Subtle, ambient background so it never interferes with content */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   gap: 1.5rem;
   transform: rotate(-3deg) scale(1.15);
-  filter: saturate(1.2) contrast(1.05);
+  filter: contrast(1.05);
 }
 
 .album-marquee-track {
@@ -48,15 +37,15 @@ body {
   height: 150px;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .marquee-left .album-marquee-group {
-  animation: marquee-left-scroll 45s linear infinite;
+  animation: marquee-left-scroll 50s linear infinite;
 }
 
 .marquee-right .album-marquee-group {
-  animation: marquee-right-scroll 50s linear infinite;
+  animation: marquee-right-scroll 55s linear infinite;
 }
 
 @keyframes marquee-left-scroll {
@@ -77,28 +66,6 @@ body {
   }
 }
 
-/* Ensure navigation and page content layer cleanly above background */
-nav.navbar {
-  position: relative;
-  z-index: 50 !important;
-}
-
-#quarto-content {
-  position: relative;
-  z-index: 10;
-}
-
-/* Content card overlay: semi-transparent so background peeks through */
-main.content {
-  background: rgba(255, 255, 255, 0.85);
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  margin-top: 1rem;
-  margin-bottom: 2.5rem;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-}
-
 /* Metric cards */
 .stat-grid {
   display: grid;
@@ -108,18 +75,18 @@ main.content {
 }
 
 .stat-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 1.25rem;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px -2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.08);
 }
 
 .stat-number {
@@ -144,11 +111,11 @@ main.content {
   flex-direction: row;
   align-items: center;
   gap: 1.5rem;
-  background: rgba(255, 255, 255, 0.95);
+  background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   margin-top: 1.25rem;
 }
 

@@ -56,19 +56,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  (function() {
-    function promoteBg() {
-      var bg = document.querySelector(".album-background-wrapper");
-      if (bg && bg.parentElement !== document.body) {
-        document.body.prepend(bg);
-      }
-    }
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", promoteBg);
-    } else {
-      promoteBg();
-    }
-  })();
-</script>
