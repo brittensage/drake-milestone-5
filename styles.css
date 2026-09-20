@@ -1,5 +1,86 @@
-/* Custom neat styling for Drake Milestone 4 */
+/* Custom neat styling for Drake Milestone 5 with animated album background */
 
+/* Animated background album covers */
+.album-background-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.13;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 2rem;
+  transform: rotate(-6deg) scale(1.18);
+  filter: contrast(1.05) saturate(1.2);
+}
+
+.album-marquee-track {
+  display: flex;
+  width: max-content;
+  overflow: hidden;
+  user-select: none;
+}
+
+.album-marquee-group {
+  display: flex;
+  flex-shrink: 0;
+  gap: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.album-marquee-group img {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+.marquee-left .album-marquee-group {
+  animation: marquee-left-scroll 45s linear infinite;
+}
+
+.marquee-right .album-marquee-group {
+  animation: marquee-right-scroll 50s linear infinite;
+}
+
+@keyframes marquee-left-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-right-scroll {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Frosted glass content container for maximum readability */
+main.content {
+  background: rgba(255, 255, 255, 0.90);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Metric cards */
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -8,18 +89,18 @@
 }
 
 .stat-card {
-  background: #f8fafc;
+  background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 1.25rem;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.08);
 }
 
 .stat-number {
@@ -38,6 +119,7 @@
   margin-top: 0.35rem;
 }
 
+/* Track card */
 .track-card {
   display: flex;
   flex-direction: row;
@@ -47,7 +129,7 @@
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   margin-top: 1.25rem;
 }
 
@@ -61,9 +143,9 @@
 .track-art {
   width: 130px;
   height: 130px;
-  border-radius: 8px;
+  border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .badge-tag {
