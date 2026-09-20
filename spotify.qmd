@@ -1,0 +1,209 @@
+---
+title: "Spotify Streaming Analytics"
+---
+
+This section analyzes Drake's global streaming footprint on Spotify based on catalog data tracked by [kworb.net](https://kworb.net/spotify/artist/3TVXtAsR1Inumwj472S9r4_songs.html). Drake is one of the most-streamed artists in Spotify history, having amassed over **140 billion streams** across 547 charted songs.
+
+::: {.stat-grid}
+::: {.stat-card}
+::: {.stat-number}
+140.7B
+:::
+::: {.stat-label}
+Total Spotify Streams
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+65.9M
+:::
+::: {.stat-label}
+Daily Streams
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+547
+:::
+::: {.stat-label}
+Catalog Tracks
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+4.48B
+:::
+::: {.stat-label}
+#1 Song (One Dance)
+:::
+:::
+:::
+
+## Catalog Stream Distribution
+
+Drake's catalog spans solo releases, lead tracks with guest artists, and guest features on other artists' tracks. The data demonstrates how guest features played a massive role in building his cumulative streaming audience.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(knitr)
+
+summary_data <- read_csv("data/kworb_summary.csv", show_col_types = FALSE)
+
+summary_data |> 
+  kable(
+    col.names = c("Metric", "Total", "As Lead", "Solo", "As Feature (*)"),
+    align = c("l", "r", "r", "r", "r")
+  )
+```
+
+## Top 15 Most Streamed Songs
+
+The chart below shows Drake's 15 most-streamed songs on Spotify of all time, colored by whether he was the lead artist or a featured performer.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 9.5
+#| fig-height: 6
+#| dpi: 300
+
+library(tidyverse)
+library(scales)
+
+songs_data <- read_csv("data/kworb_songs.csv", show_col_types = FALSE)
+
+top_15 <- songs_data |> 
+  slice_head(n = 15) |> 
+  mutate(
+    title = fct_reorder(title, streams)
+  )
+
+ggplot(top_15, aes(x = streams / 1e9, y = title, fill = role)) +
+  geom_col(width = 0.72) +
+  geom_text(
+    aes(label = str_c(round(streams / 1e9, 2), "B")),
+    hjust = -0.15,
+    size = 3.5,
+    fontface = "bold",
+    color = "#334155"
+  ) +
+  scale_x_continuous(
+    labels = label_number(suffix = "B"),
+    expand = expansion(mult = c(0, 0.15))
+  ) +
+  scale_fill_manual(values = c("Lead Artist" = "#1e40af", "Featured Artist" = "#ea580c")) +
+  labs(
+    title = "Top 15 Most-Streamed Drake Songs on Spotify",
+    subtitle = "All-time streams in billions; comparison of lead tracks vs. features",
+    x = "Total Streams (Billions)",
+    y = NULL,
+    fill = "Artist Role",
+    caption = "Source: kworb.net Spotify Artist Songs Tracker"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 15, color = "#0f172a"),
+    plot.subtitle = element_text(color = "#475569", margin = margin(b = 10)),
+    legend.position = "top",
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "#e2e8f0")
+  )
+```
+
+## Top 10 Daily Stream Velocity
+
+Streaming velocity indicates songs that continue to experience high daily playback today.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 9.5
+#| fig-height: 5
+#| dpi: 300
+
+top_daily <- songs_data |> 
+  arrange(desc(daily)) |> 
+  slice_head(n = 10) |> 
+  mutate(title = fct_reorder(title, daily))
+
+ggplot(top_daily, aes(x = daily / 1e6, y = title, fill = role)) +
+  geom_col(width = 0.72) +
+  geom_text(
+    aes(label = str_c(round(daily / 1e6, 2), "M/day")),
+    hjust = -0.15,
+    size = 3.5,
+    fontface = "bold",
+    color = "#334155"
+  ) +
+  scale_x_continuous(
+    labels = label_number(suffix = "M"),
+    expand = expansion(mult = c(0, 0.18))
+  ) +
+  scale_fill_manual(values = c("Lead Artist" = "#2563eb", "Featured Artist" = "#f97316")) +
+  labs(
+    title = "Top 10 Drake Tracks by Daily Spotify Streams",
+    subtitle = "Current daily streaming pace in millions of plays per day",
+    x = "Daily Streams (Millions)",
+    y = NULL,
+    fill = "Artist Role",
+    caption = "Source: kworb.net Spotify Artist Songs Tracker"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 15, color = "#0f172a"),
+    plot.subtitle = element_text(color = "#475569", margin = margin(b = 10)),
+    legend.position = "top",
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "#e2e8f0")
+  )
+```
+
+## Complete Spotify Songs Catalog (Top 500)
+
+Use the table below to search and sort Drake's top 500 songs on Spotify by total streams, daily streams, or role.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(DT)
+
+display_table <- songs_data |> 
+  select(
+    Rank = rank,
+    `Song Title` = title,
+    `Role` = role,
+    `All-Time Streams` = streams,
+    `Daily Streams` = daily
+  )
+
+datatable(
+  display_table,
+  filter = "top",
+  rownames = FALSE,
+  class = "hover stripe compact",
+  options = list(
+    pageLength = 20,
+    lengthMenu = c(10, 20, 50, 100),
+    autoWidth = TRUE,
+    scrollX = TRUE
+  )
+) |> 
+  formatCurrency(
+    columns = c("All-Time Streams", "Daily Streams"),
+    currency = "",
+    digits = 0
+  )
+```

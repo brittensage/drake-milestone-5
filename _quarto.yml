@@ -1,0 +1,23 @@
+project:
+  type: website
+
+website:
+  title: "Drake Music & Streaming Analytics"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: spotify.qmd
+        text: Spotify Streams
+      - href: billboard.qmd
+        text: Billboard Hot 100
+      - href: songstats.qmd
+        text: Songstats Track
+      - href: about.qmd
+        text: About
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true

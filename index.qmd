@@ -1,0 +1,161 @@
+---
+title: "Drake: Billboard Records & Streaming Dominance"
+---
+
+Welcome to the Drake music analytics project. This site examines Drake's extraordinary career by combining **over 140 billion Spotify streams** from [kworb.net](https://kworb.net/spotify/artist/3TVXtAsR1Inumwj472S9r4_songs.html), **2,569 weekly Billboard Hot 100 observations** from [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-09-14), and cross-platform track monitoring from [Songstats](https://songstats.com/track/ul9j1yr4/drake).
+
+::: {.stat-grid}
+::: {.stat-card}
+::: {.stat-number}
+140.7B
+:::
+::: {.stat-label}
+Total Spotify Streams
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+2,569
+:::
+::: {.stat-label}
+Hot 100 Chart Weeks
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+51
+:::
+::: {.stat-label}
+Weeks at #1
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+547
+:::
+::: {.stat-label}
+Spotify Charted Songs
+:::
+:::
+:::
+
+## 1. Spotify Streaming Powerhouse
+
+On Spotify, Drake is one of the highest-streaming artists in platform history. His top track, **"One Dance,"** alone surpasses 4.4 billion streams, followed by multi-billion hits such as **"God's Plan"** and **"Passionfruit."**
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 9.5
+#| fig-height: 5.2
+#| dpi: 300
+
+library(tidyverse)
+library(scales)
+
+songs_data <- read_csv("data/kworb_songs.csv", show_col_types = FALSE)
+
+top_10_spotify <- songs_data |> 
+  slice_head(n = 10) |> 
+  mutate(title = fct_reorder(title, streams))
+
+ggplot(top_10_spotify, aes(x = streams / 1e9, y = title, fill = role)) +
+  geom_col(width = 0.7) +
+  geom_text(
+    aes(label = str_c(round(streams / 1e9, 2), "B")),
+    hjust = -0.15,
+    size = 3.6,
+    fontface = "bold",
+    color = "#1e293b"
+  ) +
+  scale_x_continuous(
+    labels = label_number(suffix = "B"),
+    expand = expansion(mult = c(0, 0.16))
+  ) +
+  scale_fill_manual(values = c("Lead Artist" = "#1e40af", "Featured Artist" = "#ea580c")) +
+  labs(
+    title = "Top 10 Drake Tracks on Spotify by Total Streams",
+    subtitle = "Streaming figures in billions; showing lead singles vs. guest features",
+    x = "Streams (Billions)",
+    y = NULL,
+    fill = "Drake's Role",
+    caption = "Source: kworb.net Spotify Songs Tracker"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 15, color = "#0f172a"),
+    plot.subtitle = element_text(color = "#475569", margin = margin(b = 10)),
+    legend.position = "top",
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "#e2e8f0")
+  )
+```
+
+[Explore full Spotify breakdown & 500-track table &rarr;](spotify.html){.btn .btn-primary .btn-sm}
+
+---
+
+## 2. Billboard Hot 100 Longevity (2009–2021)
+
+Drake's Billboard presence illustrates an unbroken decade of chart supremacy. The plot below maps all 2,569 weekly positions Drake occupied between 2009 and 2021.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 9.5
+#| fig-height: 5.2
+#| dpi: 300
+
+drake_bb <- read_csv("data/drake_billboard.csv", show_col_types = FALSE) |> 
+  mutate(
+    role = if_else(str_starts(performer, "Drake"), "Lead Artist", "Featured Artist")
+  )
+
+ggplot(drake_bb, aes(x = week_date, y = week_position, color = role)) +
+  geom_point(alpha = 0.4, size = 1.8) +
+  geom_smooth(se = FALSE, method = "loess", span = 0.32, linewidth = 1.1) +
+  scale_y_reverse(breaks = c(1, 10, 25, 50, 75, 100)) +
+  scale_color_manual(values = c("Lead Artist" = "#1e40af", "Featured Artist" = "#ea580c")) +
+  scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
+  labs(
+    title = "Drake's Billboard Hot 100 Trajectory",
+    subtitle = "2,569 weekly chart positions across lead releases and guest appearances",
+    x = "Year",
+    y = "Billboard Position (1 is top)",
+    color = "Drake's Role",
+    caption = "Source: TidyTuesday / Billboard.com"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 15, color = "#0f172a"),
+    plot.subtitle = element_text(color = "#475569", margin = margin(b = 10)),
+    legend.position = "top",
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_line(color = "#f1f5f9")
+  )
+```
+
+[Explore full Billboard chart history & interactive table &rarr;](billboard.html){.btn .btn-outline-primary .btn-sm}
+
+---
+
+## 3. Songstats Global DSP Monitoring
+
+In addition to catalog totals, we feature track-level telemetry from [Songstats](https://songstats.com/track/ul9j1yr4/drake):
+
+::: {.track-card}
+<img src="https://i.scdn.co/image/ab67616d00001e02f0c843a56521f2be4d0d10e2" alt="Drake Track Artwork" class="track-art" />
+
+<div>
+  <h4 style="margin-top:0;">Featured Track: "Drake"</h4>
+  <p style="margin-bottom:0.4rem; color:#475569;"><strong>Artists:</strong> Alsago & Slight Shady &bull; <strong>Release Date:</strong> March 13, 2026</p>
+  <p style="margin-bottom:0.4rem; color:#475569;"><strong>ISRC:</strong> <code>CAHQJ2683690</code> &bull; <strong>Distribution:</strong> 184 Countries on Spotify, Apple Music, Deezer, Amazon & Tidal</p>
+  <p style="margin-bottom:0;"><a href="songstats.html" class="btn btn-outline-primary btn-sm">View Songstats Details &rarr;</a> <a href="https://songstats.com/track/ul9j1yr4/drake" target="_blank" class="btn btn-outline-secondary btn-sm">Open on Songstats.com &nearr;</a></p>
+</div>
+:::

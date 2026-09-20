@@ -1,0 +1,31 @@
+---
+title: "About"
+---
+
+## Project Overview
+
+This website analyzes Drake's historic music career by bringing together multi-source data across Billboard chart longevity, cross-platform DSP distribution, and global Spotify streaming numbers.
+
+## Data Sources & Links
+
+1. **Spotify Top Songs Tracker (kworb.net):**
+   - Catalog of 547 charted songs tracking over **140.7 billion all-time Spotify streams** and 65.9 million daily streams.
+   - Sourced from [kworb.net Spotify Artist Tracker](https://kworb.net/spotify/artist/3TVXtAsR1Inumwj472S9r4_songs.html).
+
+2. **Songstats Cross-Platform DSP Monitoring:**
+   - Real-time catalog distribution and metadata for the track titled **"Drake"** by Alsago & Slight Shady across 184 country markets.
+   - Sourced from [Songstats](https://songstats.com/track/ul9j1yr4/drake).
+
+3. **Billboard Hot 100 Historical Archive (TidyTuesday):**
+   - **2,569 weekly observations** tracing every song where Drake was credited as a lead artist or featured performer between 2009 and 2021.
+   - Sourced from the official [TidyTuesday Billboard repository](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-09-14).
+
+4. **Billboard Official Artist Chart History:**
+   - Historical chart peak positions and weeks at #1.
+   - Sourced from [Billboard.com Drake Chart History](https://www.billboard.com/artist/drake/chart-history/).
+
+## Author
+
+- **Author:** Britten
+- **Course:** Data Science (*Preceptor's Primer for Bayesian Data Science*)
+- **Repository:** [brittensage/drake-milestone-5](https://github.com/brittensage/drake-milestone-5)

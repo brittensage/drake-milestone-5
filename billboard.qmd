@@ -1,0 +1,122 @@
+---
+title: "Billboard Hot 100 Archive"
+---
+
+This section covers Drake's historic run on the Billboard Hot 100 from his first entry in 2009 through 2021, containing **2,569 weekly chart observations** curated via [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-09-14) and [Billboard's chart history](https://www.billboard.com/artist/drake/chart-history/).
+
+::: {.stat-grid}
+::: {.stat-card}
+::: {.stat-number}
+2,569
+:::
+::: {.stat-label}
+Total Observations
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+234
+:::
+::: {.stat-label}
+Distinct Songs
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+51
+:::
+::: {.stat-label}
+Weeks at #1
+:::
+:::
+
+::: {.stat-card}
+::: {.stat-number}
+301
+:::
+::: {.stat-label}
+Top 10 Weeks
+:::
+:::
+:::
+
+## Career Chart Trajectory (2009–2021)
+
+Every single weekly chart rank is plotted below. Drake has set records for both longevity and simultaneous multi-song saturation on the Hot 100.
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 10
+#| fig-height: 5.8
+#| dpi: 300
+
+library(tidyverse)
+
+drake_data <- read_csv("data/drake_billboard.csv", show_col_types = FALSE) |> 
+  mutate(
+    role = if_else(str_starts(performer, "Drake"), "Lead Artist", "Featured Artist")
+  )
+
+ggplot(drake_data, aes(x = week_date, y = week_position, color = role)) +
+  geom_point(alpha = 0.42, size = 1.9) +
+  geom_smooth(se = FALSE, method = "loess", span = 0.32, linewidth = 1.1) +
+  scale_y_reverse(breaks = c(1, 10, 25, 50, 75, 100)) +
+  scale_color_manual(values = c("Lead Artist" = "#1e40af", "Featured Artist" = "#ea580c")) +
+  scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
+  labs(
+    title = "Drake on the Billboard Hot 100 (2009–2021)",
+    subtitle = "Tracking 2,569 weekly positions across lead and featured tracks",
+    x = "Year",
+    y = "Billboard Hot 100 Rank (1 is top)",
+    color = "Drake's Role",
+    caption = "Source: TidyTuesday / Billboard.com (2,569 observations)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16, color = "#0f172a"),
+    plot.subtitle = element_text(color = "#475569", margin = margin(b = 12)),
+    legend.position = "top",
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_line(color = "#f1f5f9")
+  )
+```
+
+## Billboard Historical Explorer
+
+Search and filter all 2,569 chart appearances:
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(DT)
+
+drake_table <- drake_data |> 
+  select(
+    `Chart Date` = week_date,
+    `Rank` = week_position,
+    `Song Title` = song,
+    `Performer Credit` = performer,
+    `Peak Rank` = peak_position,
+    `Weeks on Chart` = weeks_on_chart
+  ) |> 
+  arrange(desc(`Chart Date`), `Rank`)
+
+datatable(
+  drake_table,
+  filter = "top",
+  rownames = FALSE,
+  class = "hover stripe compact",
+  options = list(
+    pageLength = 20,
+    lengthMenu = c(10, 20, 50, 100),
+    autoWidth = TRUE,
+    scrollX = TRUE
+  )
+)
+```
