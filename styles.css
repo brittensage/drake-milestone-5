@@ -1,22 +1,31 @@
-/* Custom neat styling for Drake Milestone 5 with animated album background */
+/* Custom styling for Drake Milestone 5 with animated album background */
 
-/* Animated background album covers */
+html {
+  background-color: #f8fafc;
+}
+
+body {
+  background-color: transparent !important;
+  position: relative;
+}
+
+/* Animated moving album covers in background */
 .album-background-wrapper {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
+  z-index: 0; /* Layered above body canvas, behind page content */
   pointer-events: none;
   overflow: hidden;
-  opacity: 0.13;
+  opacity: 0.30; /* Clear and distinctly visible */
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  gap: 2rem;
-  transform: rotate(-6deg) scale(1.18);
-  filter: contrast(1.05) saturate(1.2);
+  justify-content: space-around;
+  gap: 1.5rem;
+  transform: rotate(-4deg) scale(1.15);
+  filter: saturate(1.15);
 }
 
 .album-marquee-track {
@@ -38,7 +47,7 @@
   height: 140px;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
 }
 
 .marquee-left .album-marquee-group {
@@ -67,17 +76,28 @@
   }
 }
 
-/* Frosted glass content container for maximum readability */
+/* Ensure content and navigation sit cleanly on top */
+nav.navbar {
+  position: relative;
+  z-index: 100 !important;
+}
+
+#quarto-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Semi-transparent frosted glass content container for readability */
 main.content {
-  background: rgba(255, 255, 255, 0.90);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: 2rem;
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
   margin-top: 1rem;
   margin-bottom: 2.5rem;
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.85);
 }
 
 /* Metric cards */
