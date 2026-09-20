@@ -1,0 +1,135 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Drake: Billboard Records & Streaming Dominance",
+    "section": "",
+    "text": "Welcome to the Drake music analytics project. This site examines Drake’s historic career through thousands of data points—combining 2,569 weekly Billboard Hot 100 observations from TidyTuesday with over 140 billion Spotify streams from kworb.net and track telemetry from Songstats."
+  },
+  {
+    "objectID": "index.html#career-chart-trajectory-2569-observations",
+    "href": "index.html#career-chart-trajectory-2569-observations",
+    "title": "Drake: Billboard Records & Streaming Dominance",
+    "section": "Career Chart Trajectory (2,569 Observations)",
+    "text": "Career Chart Trajectory (2,569 Observations)\nThe visualization below is constructed from 2,569 individual weekly chart appearances by Drake on the Billboard Hot 100 between 2009 and 2021. Every point captures a single week on the chart, colored by whether Drake was the primary lead artist or a featured collaborator. The trend lines illustrate how Drake maintained an unbroken top-tier chart presence across more than a decade.\n\n\n\n\n\n\n\n\n\n\nExplore Interactive Billboard Data → Read Story: The Feature Effect →"
+  },
+  {
+    "objectID": "index.html#spotify-streaming-dominance",
+    "href": "index.html#spotify-streaming-dominance",
+    "title": "Drake: Billboard Records & Streaming Dominance",
+    "section": "Spotify Streaming Dominance",
+    "text": "Spotify Streaming Dominance\nAlongside his historical Billboard dominance, Drake is one of the most-streamed artists in Spotify history, accumulating over 140 billion streams.\n\n\n\n\n\n\n\n\n\nBrowse Full 500-Song Spotify Catalog →"
+  },
+  {
+    "objectID": "index.html#featured-cross-platform-track",
+    "href": "index.html#featured-cross-platform-track",
+    "title": "Drake: Billboard Records & Streaming Dominance",
+    "section": "Featured Cross-Platform Track",
+    "text": "Featured Cross-Platform Track\nTrack-level telemetry from Songstats illustrates global DSP footprint:\n\n\n\n\nTrack: “Drake”\n\n\nArtists: Alsago & Slight Shady • Release Date: March 13, 2026\n\n\nISRC: CAHQJ2683690 • Distribution: 184 Countries across Spotify, Apple Music, Deezer, Amazon & Tidal\n\n\nView Songstats Track → Open on Songstats.com ↗"
+  },
+  {
+    "objectID": "songstats.html",
+    "href": "songstats.html",
+    "title": "Songstats Track Analytics",
+    "section": "",
+    "text": "This page provides analytics and metadata for the track titled “Drake” sourced from Songstats."
+  },
+  {
+    "objectID": "songstats.html#track-details",
+    "href": "songstats.html#track-details",
+    "title": "Songstats Track Analytics",
+    "section": "Track Details",
+    "text": "Track Details\n\n\n\n\n\nProperty\nDetails\n\n\n\n\nTrack Name\nDrake\n\n\nArtists\nAlsago & Slight Shady\n\n\nRelease Date\n2026-03-13\n\n\nISRC Code\nCAHQJ2683690\n\n\nDuration\n4:03 (243,421 ms)\n\n\nAvailable Global Markets\n184 territories\n\n\nSongstats Source URL\nsongstats.com/track/ul9j1yr4/drake"
+  },
+  {
+    "objectID": "songstats.html#streaming-distribution",
+    "href": "songstats.html#streaming-distribution",
+    "title": "Songstats Track Analytics",
+    "section": "Streaming Distribution",
+    "text": "Streaming Distribution\nAccording to Songstats cross-platform monitoring, the release is tracked across multiple DSPs including:\n\nSpotify: Available across 184 country markets (Listen on Spotify)\nApple Music: Catalog ID 1880726848\nDeezer: Track ID 3871419791\nTidal: Track ID 502868283\nAmazon Music: ASIN B0GQJP4F4K"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This website analyzes Drake’s historic music career by bringing together multi-source data across Billboard chart longevity, cross-platform DSP distribution, and global Spotify streaming numbers."
+  },
+  {
+    "objectID": "about.html#project-overview",
+    "href": "about.html#project-overview",
+    "title": "About",
+    "section": "",
+    "text": "This website analyzes Drake’s historic music career by bringing together multi-source data across Billboard chart longevity, cross-platform DSP distribution, and global Spotify streaming numbers."
+  },
+  {
+    "objectID": "about.html#data-sources-links",
+    "href": "about.html#data-sources-links",
+    "title": "About",
+    "section": "Data Sources & Links",
+    "text": "Data Sources & Links\n\nSpotify Top Songs Tracker (kworb.net):\n\nCatalog of 547 charted songs tracking over 140.7 billion all-time Spotify streams and 65.9 million daily streams.\nSourced from kworb.net Spotify Artist Tracker.\n\nSongstats Cross-Platform DSP Monitoring:\n\nReal-time catalog distribution and metadata for the track titled “Drake” by Alsago & Slight Shady across 184 country markets.\nSourced from Songstats.\n\nBillboard Hot 100 Historical Archive (TidyTuesday):\n\n2,569 weekly observations tracing every song where Drake was credited as a lead artist or featured performer between 2009 and 2021.\nSourced from the official TidyTuesday Billboard repository.\n\nBillboard Official Artist Chart History:\n\nHistorical chart peak positions and weeks at #1.\nSourced from Billboard.com Drake Chart History."
+  },
+  {
+    "objectID": "about.html#author",
+    "href": "about.html#author",
+    "title": "About",
+    "section": "Author",
+    "text": "Author\n\nAuthor: Britten\nCourse: Data Science (Preceptor’s Primer for Bayesian Data Science)\nRepository: brittensage/drake-milestone-5"
+  },
+  {
+    "objectID": "explorer.html",
+    "href": "explorer.html",
+    "title": "Chart & Track Explorer",
+    "section": "",
+    "text": "This tab puts control directly in your hands. Explore 2,569 weekly Billboard Hot 100 observations across Drake’s chart career (2009–2021)."
+  },
+  {
+    "objectID": "explorer.html#searchable-billboard-database",
+    "href": "explorer.html#searchable-billboard-database",
+    "title": "Chart & Track Explorer",
+    "section": "Searchable Billboard Database",
+    "text": "Searchable Billboard Database\nFilter and sort through every individual observation. Use the column search boxes to look up specific tracks (e.g., “God’s Plan”, “In My Feelings”, “Hotline Bling”) or view all songs that peaked at #1."
+  },
+  {
+    "objectID": "spotify.html",
+    "href": "spotify.html",
+    "title": "Spotify Streaming Analytics",
+    "section": "",
+    "text": "This section analyzes Drake’s global streaming footprint on Spotify based on catalog data tracked by kworb.net. Drake is one of the most-streamed artists in Spotify history, having amassed over 140 billion streams across 547 charted songs."
+  },
+  {
+    "objectID": "spotify.html#catalog-stream-distribution",
+    "href": "spotify.html#catalog-stream-distribution",
+    "title": "Spotify Streaming Analytics",
+    "section": "Catalog Stream Distribution",
+    "text": "Catalog Stream Distribution\nDrake’s catalog spans solo releases, lead tracks with guest artists, and guest features on other artists’ tracks. The data demonstrates how guest features played a massive role in building his cumulative streaming audience.\n\n\n\n\n\nMetric\nTotal\nAs Lead\nSolo\nAs Feature (*)\n\n\n\n\nStreams\n140718642148\n97502135125\n55003179608\n43216507023\n\n\nDaily\n65923302\n41363057\n25874597\n24560245\n\n\nTracks\n547\n356\n228\n191"
+  },
+  {
+    "objectID": "spotify.html#top-15-most-streamed-songs",
+    "href": "spotify.html#top-15-most-streamed-songs",
+    "title": "Spotify Streaming Analytics",
+    "section": "Top 15 Most Streamed Songs",
+    "text": "Top 15 Most Streamed Songs\nThe chart below shows Drake’s 15 most-streamed songs on Spotify of all time, colored by whether he was the lead artist or a featured performer."
+  },
+  {
+    "objectID": "spotify.html#top-10-daily-stream-velocity",
+    "href": "spotify.html#top-10-daily-stream-velocity",
+    "title": "Spotify Streaming Analytics",
+    "section": "Top 10 Daily Stream Velocity",
+    "text": "Top 10 Daily Stream Velocity\nStreaming velocity indicates songs that continue to experience high daily playback today."
+  },
+  {
+    "objectID": "spotify.html#complete-spotify-songs-catalog-top-500",
+    "href": "spotify.html#complete-spotify-songs-catalog-top-500",
+    "title": "Spotify Streaming Analytics",
+    "section": "Complete Spotify Songs Catalog (Top 500)",
+    "text": "Complete Spotify Songs Catalog (Top 500)\nUse the table below to search and sort Drake’s top 500 songs on Spotify by total streams, daily streams, or role."
+  },
+  {
+    "objectID": "features.html",
+    "href": "features.html",
+    "title": "The Feature Effect: How Collaborations Built an Empire",
+    "section": "",
+    "text": "Hip-hop has always been a collaborative genre, but Drake turned guest features into a deliberate strategy for uninterrupted commercial dominance. Between 2008 and 2021, Drake charted on the Billboard Hot 100 in 2,569 weekly observations. A remarkable 1,085 of those appearances—over 42%—came not from his own singles, but as a featured performer on other artists’ tracks.\nThe graphic below breaks down Drake’s chart footprint by year, illustrating how guest verses carried his momentum during “gap years” between major album cycles.\n\n\n\n\n\n\n\n\n\nEarly in his career (2009–2012), guest appearances provided an essential runway. Breakthrough collaborations with established stars like Lil Wayne, Rihanna, and Nicki Minaj built his crossover radio audience. By 2011, guest features represented over 67% of Drake’s total Billboard chart footprint.\nBy the mid-2010s, this dynamic reversed. Rather than relying on others for exposure, Drake became the genre’s premier kingmaker. The industry coined the phrase “The Drake Stimulus Package” to describe the guaranteed commercial boost of a Drake guest verse. Hits like Bad Bunny’s “MIA,” Future’s “Life Is Good,” and BlocBoy JB’s “Look Alive” debuted near the top of the Hot 100 primarily on the strength of Drake’s co-signature.\nModern streaming data from kworb.net confirms that this strategy paid enormous digital dividends. Out of Drake’s 140.7 billion total Spotify streams, 43.2 billion streams (30.7%) originate from tracks where he is credited as a featured artist. His feature on Rihanna’s “Work” alone accounts for 1.76 billion streams, with Future’s “Life Is Good” and Bad Bunny’s “MIA” each adding more than 1.5 billion streams.\nUltimately, Drake’s dual identity as both a solo pop star and a prolific guest collaborator eliminated the downtime that typically sidelines artists between major LP releases. By keeping his voice in rotation 52 weeks a year, Drake maintained a historic 430-consecutive-week streak on the Billboard Hot 100—a record that remains unmatched in modern chart history.\n\nLandmark Guest Features: Commercial Case Studies\n\n\n\n\n\n\n\n\n\n\n\n\nTrack Title\nLead Artist\nHot 100 Peak\nSpotify Streams\nRelease Year\n\n\n\n\nWork\nRihanna\n#1 (9 weeks)\n1.76 Billion\n2016\n\n\nMIA\nBad Bunny\n#5\n1.62 Billion\n2018\n\n\nLove Me\nLil Wayne\n#9\n1.56 Billion\n2013\n\n\nLife Is Good\nFuture\n#2 (8 weeks)\n1.52 Billion\n2020\n\n\nLook Alive\nBlocBoy JB\n#5\n1.15 Billion\n2018"
+  }
+]
